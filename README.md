@@ -1,2 +1,4 @@
 # tensorhelper
-Helper functions for data analytics and Machine learning.
+Under development! Not ready for use yet! Currently experimenting and planning!
+
+
