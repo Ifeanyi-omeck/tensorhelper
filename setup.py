@@ -8,15 +8,16 @@ LONG_DESCRIPTION = 'A package that loads random images from a directory, a custo
 
 # Setting up
 setup(
-    name="helperpackage",
+    name="tensorhelper",
     version=VERSION,
     author="ifeanyi_omeck",
     author_email="kifeanyi@gmail.com",
     description=DESCRIPTION,
     long_description_content_type="text/markdown",
     long_description=LONG_DESCRIPTION,
+    url = 'https://github.com/Ifeanyi-omeck/tensorhelper',
     packages=find_packages(),
-    install_requires=['pandas', 'matplotlib', 'tensorflow'],
+    install_requires=[],
     keywords=['python', 'confusion_matrix', 'loss_curves', 'accuracy_curves', 'random_images'],
     classifiers=[
         "Development Status :: 1 - Planning",
