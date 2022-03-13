@@ -1,12 +1,13 @@
-import tensorflow as tf
+import tensorflow
 import random
-import pandas as pd
-import os
-import matplotlib.image as mpimg
 import matplotlib.pyplot as plt
 import itertools
 from sklearn.metrics import confusion_matrix
-
+import matplotlib.image as mpimg
+import pandas as pd
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+import datetime
+import tensorflow_hub as hub
 
 
 def image_reader(target_folder, target_class):
@@ -140,3 +141,39 @@ def make_confusion_matrix(y_true, y_pred, classes=None, figsize=(10, 10), text_s
              horizontalalignment="center",
              color="white" if cm[i, j] > threshold else "black",
              size=text_size)
+
+
+def create_tensorboard_callback(directory_name, model_name):
+  """
+  Creates a tensorboard callback in a chosen directory alongside model/experiment
+  name, date and time of when the function is called.
+  """
+  log_dir = directory_name + '/' + model_name + '/' + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+  tensorboard = tf.keras.callbacks.TensorBoard(log_dir = log_dir)
+  print(f' Saving tensorboard files to: {log_dir}')
+  return tensorboard
+
+
+def create_tensorhub_model(tensorhub_url, num_output, input_shape, trainable = False):
+
+  """
+  Takes a TensorFlow Hub URL and creates a Keras Sequential model with it.
+    
+    Args:
+      model_url (str): A TensorFlow Hub feature extraction URL.
+      num_classes (int): Number of output neurons in output layer,
+        should be equal to number of target classes, default 10.
+
+    Returns:
+      An uncompiled Keras Sequential model with model_url as feature
+      extractor layer and Dense output layer with num_classes outputs.
+  """
+  model_url = hub.KerasLayer(tensorhub_url,  
+                             trainable = trainable,
+                             name = 'feature_extrator_layer',
+                             input_shape = input_shape)
+
+  tensorhub = tf.keras.Sequential([model_url,
+              tf.keras.layers.Dense(num_output, activation = 'softmax', 
+                             name = 'output_layer')])
+  return tensorhub 
