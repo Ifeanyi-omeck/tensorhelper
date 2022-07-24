@@ -7,6 +7,7 @@ import matplotlib.image as mpimg
 import pandas as pd
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import datetime
+import numpy as np
 import tensorflow_hub as hub
 
 
