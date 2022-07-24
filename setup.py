@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 import codecs
 import os
 
-VERSION = '0.1.3'
+VERSION = '0.2.0'
 DESCRIPTION = 'A helper function for data analytics and machine learning'
 LONG_DESCRIPTION = 'A package that loads random images from a directory, a custom built confusion matrix and generate accuracy and loss curves for machine learning'
 
